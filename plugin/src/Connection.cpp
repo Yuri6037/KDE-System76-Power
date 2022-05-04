@@ -32,9 +32,13 @@
 Connection::Connection(QObject *parent)
     : QObject(parent)
     , _connection(QDBusConnection::systemBus())
-    , _curProfile(PowerProfile_Balanced)
+    , _curProfile(PowerProfile_Performance)
 {
     _connection.connect(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "PowerProfileSwitch", this, SLOT(onProfileChanged()));
+    auto method = QDBusMessage::createMethodCall(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "GetProfile");
+    auto res = _connection.call(method);
+    auto name = res.arguments().at(0).toString();
+    onProfileChanged(name);
 }
 
 void Connection::setProfile(Connection::PowerProfile profile)
