@@ -1,0 +1,17 @@
+[Desktop Entry]
+Encoding = UTF-8
+Name = System76 Power
+Comment = Control power profile using system76-power daemon
+Type = Service
+
+X-KDE-ParentApp =
+X-KDE-PluginInfo-Author = Yuri Edward
+X-KDE-PluginInfo-Email = yuri6037@outlook.com
+X-KDE-PluginInfo-License = BSD-3-Clause
+X-KDE-PluginInfo-Name = org.kde.systemd
+X-KDE-PluginInfo-Version = 2.0.1
+X-KDE-PluginInfo-Website = https://github.com/Yuri6067/KDE-System76-Power
+X-KDE-ServiceTypes = Plasma/Applet
+X-Plasma-API = declarativeappletscript
+X-Plasma-MainScript = ui/main.qml
+X-KDE-PluginInfo-Category = System Information

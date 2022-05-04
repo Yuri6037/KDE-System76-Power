@@ -1,3 +1,5 @@
 extra-cmake-modules
 qtbase5-dev
 qtdeclarative5-dev
+libkf5plasma-dev
+libkf5notifications-dev

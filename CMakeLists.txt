@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 project(system76_power_kde
         DESCRIPTION "A plasmoid to control system76 power profile."
         HOMEPAGE_URL "https://github.com/yuri6037/KDE-System76-Power"
@@ -16,4 +16,10 @@ find_package(Qt5
              DBus
              Quick)
 
+find_package(KF5 ${KF5_REQUIRED_VERSION}
+        REQUIRED COMPONENTS
+        Notifications
+        Plasma)
+
 add_subdirectory(plugin)
+add_subdirectory(plasmoid)
