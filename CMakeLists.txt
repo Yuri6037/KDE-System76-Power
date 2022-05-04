@@ -19,7 +19,6 @@ find_package(Qt5
 
 find_package(KF5 ${KF5_REQUIRED_VERSION}
         REQUIRED COMPONENTS
-        Notifications
         Plasma)
 
 add_subdirectory(plugin)
