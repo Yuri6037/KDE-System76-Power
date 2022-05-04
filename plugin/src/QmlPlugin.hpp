@@ -26,3 +26,22 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#pragma once
+
+#include <QtQml/QQmlExtensionPlugin>
+
+#include <QDebug>
+
+class QmlPlugin : public QQmlExtensionPlugin
+{
+Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface/1.0")
+public:
+    explicit QmlPlugin(QObject* parent = Q_NULLPTR)
+            : QQmlExtensionPlugin(parent)
+    {}
+
+    ~QmlPlugin() override = default;
+
+    void registerTypes(const char* uri) override;
+};

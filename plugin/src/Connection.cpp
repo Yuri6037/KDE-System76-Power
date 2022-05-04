@@ -26,3 +26,51 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <QtDBus/QDBusMessage>
+#include "Connection.hpp"
+
+Connection::Connection(QObject *parent)
+    : QObject(parent)
+    , _connection(QDBusConnection::systemBus())
+    , _curProfile(PowerProfile_Balanced)
+{
+    _connection.connect(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "PowerProfileSwitch", this, SLOT(onProfileChanged()));
+}
+
+void Connection::setProfile(Connection::PowerProfile profile)
+{
+    QDBusMessage msg;
+    switch (profile) {
+        case Connection::PowerProfile::PowerProfile_Balanced:
+            msg = QDBusMessage::createMethodCall(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "Balanced");
+            break;
+        case Connection::PowerProfile::PowerProfile_Battery:
+            msg = QDBusMessage::createMethodCall(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "Battery");
+            break;
+        case Connection::PowerProfile::PowerProfile_Performance:
+            msg = QDBusMessage::createMethodCall(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "Performance");
+            break;
+    }
+    _connection.call(msg);
+}
+
+Connection::PowerProfile Connection::getProfile()
+{
+    return _curProfile;
+}
+
+void Connection::powerProfileChanged() const
+{
+}
+
+void Connection::onProfileChanged(const QString &name)
+{
+    if (name == "Performance") {
+        _curProfile = PowerProfile_Performance;
+    } else if (name == "Balanced") {
+        _curProfile = PowerProfile_Balanced;
+    } else if (name == "Battery") {
+        _curProfile = PowerProfile_Battery;
+    }
+    emit powerProfileChanged();
+}

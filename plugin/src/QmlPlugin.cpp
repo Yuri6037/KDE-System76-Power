@@ -26,40 +26,11 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#pragma once
+#include "QmlPlugin.hpp"
+#include "Connection.hpp"
+#include <QtQml/qqml.h>
 
-#include <QtCore/QtPlugin>
-#include <QtDBus/QDBusConnection>
-#include <QtDBus/QDBusMessage>
-
-#include "system76_power_kde_plugin_export.h"
-
-#define DBUS_INTERFACE "com.system76.PowerDaemon"
-#define DBUS_PATH "/com/system76/PowerDaemon"
-#define DBUS_SERVICE "com.system76.PowerDaemon"
-
-class SYSTEM76_POWER_KDE_PLUGIN_EXPORT Connection : public QObject {
-Q_OBJECT
-public:
-    explicit Connection(QObject *parent = nullptr);
-
-    enum PowerProfile {
-        PowerProfile_Performance,
-        PowerProfile_Balanced,
-        PowerProfile_Battery
-    };
-    Q_ENUM(PowerProfile)
-
-    Q_INVOKABLE void setProfile(Connection::PowerProfile profile);
-    Q_INVOKABLE Connection::PowerProfile getProfile();
-
-Q_SIGNALS:
-    void powerProfileChanged() const;
-
-private slots:
-    void onProfileChanged(const QString &name);
-
-private:
-    QDBusConnection _connection;
-    PowerProfile _curProfile;
-};
+void QmlPlugin::registerTypes(const char *uri)
+{
+    qmlRegisterType<Connection>(uri, 0, 1, "Connection");
+}
