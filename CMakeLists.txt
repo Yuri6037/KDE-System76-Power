@@ -14,3 +14,5 @@ find_package(Qt5
              Core
              DBus
              Quick)
+
+add_subdirectory(plugin)
