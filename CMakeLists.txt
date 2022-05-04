@@ -7,6 +7,7 @@ project(system76_power_kde
 find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
+include(GenerateExportHeader)
 include(KDEInstallDirs)
 
 find_package(Qt5
