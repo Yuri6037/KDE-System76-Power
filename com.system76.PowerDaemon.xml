@@ -1,0 +1,32 @@
+<node>
+  <interface name="com.system76.PowerDaemon">
+    <method name="Performance"/>
+    <method name="Balanced"/>
+    <method name="Battery"/>
+    <method name="GetProfile">
+        <arg name="profile" type="s" direction="out"/>
+    </method>
+    <method name="GetGraphics">
+      <arg name="vendor" type="s" direction="out"/>
+    </method>
+    <method name="SetGraphics">
+      <arg name="vendor" type="s" direction="in"/>
+    </method>
+    <method name="GetSwitchable">
+      <arg name="switchable" type="b" direction="out"/>
+    </method>
+    <method name="GetGraphicsPower">
+      <arg name="power" type="b" direction="out"/>
+    </method>
+    <method name="SetGraphicsPower">
+      <arg name="power" type="b" direction="in"/>
+    </method>
+    <method name="AutoGraphicsPower"/>
+    <signal name="HotPlugDetect">
+      <arg name="port" type="t"/>
+    </signal>
+    <signal name="PowerProfileSwitch">
+      <arg name="profile" type="s"/>
+    </signal>
+  </interface>
+</node>
