@@ -3,6 +3,7 @@ Encoding = UTF-8
 Name = System76 Power
 Comment = Control power profile using system76-power daemon
 Type = Service
+Icon = preferences-system-power-management
 
 X-KDE-ParentApp =
 X-KDE-PluginInfo-Author = Yuri Edward
