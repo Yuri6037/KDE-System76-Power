@@ -34,7 +34,7 @@ Connection::Connection(QObject *parent)
     , _connection(QDBusConnection::systemBus())
     , _curProfile(PowerProfile_Performance)
 {
-    _connection.connect(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "PowerProfileSwitch", this, SLOT(onProfileChanged()));
+    _connection.connect(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "PowerProfileSwitch", this, SLOT(onProfileChanged(QString)));
     auto method = QDBusMessage::createMethodCall(DBUS_SERVICE, DBUS_PATH, DBUS_INTERFACE, "GetProfile");
     auto res = _connection.call(method);
     auto name = res.arguments().at(0).toString();
@@ -63,13 +63,13 @@ Connection::PowerProfile Connection::getProfile()
     return _curProfile;
 }
 
-void Connection::onProfileChanged(const QString &name)
+void Connection::onProfileChanged(const QString &profile)
 {
-    if (name == "Performance") {
+    if (profile == "Performance") {
         _curProfile = PowerProfile_Performance;
-    } else if (name == "Balanced") {
+    } else if (profile == "Balanced") {
         _curProfile = PowerProfile_Balanced;
-    } else if (name == "Battery") {
+    } else if (profile == "Battery") {
         _curProfile = PowerProfile_Battery;
     }
     emit powerProfileChanged();

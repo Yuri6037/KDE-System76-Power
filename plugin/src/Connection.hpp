@@ -53,11 +53,11 @@ public:
     Q_INVOKABLE void setProfile(Connection::PowerProfile profile);
     Q_INVOKABLE Connection::PowerProfile getProfile();
 
-Q_SIGNALS:
+signals:
     void powerProfileChanged() const;
 
 private slots:
-    void onProfileChanged(const QString &name);
+    void onProfileChanged(const QString &profile);
 
 private:
     QDBusConnection _connection;
