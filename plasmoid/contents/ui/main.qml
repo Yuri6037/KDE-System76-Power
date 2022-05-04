@@ -47,32 +47,32 @@ Item {
         }
     }
 
-    function getProfileLetter() {
-        switch (con.getProfile()) {
-            case 0:
-                return "H";
-            case 1:
-                return "N";
-            case 2:
-                return "L";
-        }
-    }
-
     property string currentProfileText: "Current profile: " + getProfileName();
-    property string currentProfileLetter: getProfileLetter();
+    property bool performance: con.getProfile() == 0;
+    property bool balanced: con.getProfile() == 1;
+    property bool battery: con.getProfile() == 2;
 
     Connection {
         id: con;
         onPowerProfileChanged: {
             currentProfileText = "Current profile: " + getProfileName();
-            currentProfileLetter = getProfileLetter();
-        }
-    }
-
-    Plasmoid.compactRepresentation: Item {
-        PlasmaComponents.Label {
-            text: currentProfileLetter;
-            color: "black";
+            switch (con.getProfile()) {
+                case 0:
+                    performance = true;
+                    balanced = false;
+                    battery = false;
+                    break;
+                case 1:
+                    performance = false;
+                    balanced = true;
+                    battery = false;
+                    break;
+                case 2:
+                    performance = false;
+                    balanced = false;
+                    battery = true;
+                    break;
+            }
         }
     }
 
@@ -84,19 +84,19 @@ Item {
         ExclusiveGroup { id: selectedProfile }
         PlasmaComponents.RadioButton {
             text: "Performance";
-            checked: con.getProfile() == 0;
+            checked: performance;
             exclusiveGroup: selectedProfile;
             onClicked: con.setProfile(0);
         }
         PlasmaComponents.RadioButton {
             text: "Balanced";
-            checked: con.getProfile() == 1;
+            checked: balanced;
             exclusiveGroup: selectedProfile;
             onClicked: con.setProfile(1);
         }
         PlasmaComponents.RadioButton {
             text: "Battery";
-            checked: con.getProfile() == 2;
+            checked: battery;
             exclusiveGroup: selectedProfile;
             onClicked: con.setProfile(2);
         }
