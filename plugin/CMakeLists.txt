@@ -1,5 +1,5 @@
 set(PLUGIN_SRCS
-        src/QmlPlugin.hpp src/QmlPlugin.cpp
+        src/QmlPlugin.cpp
         src/Connection.cpp src/Connection.hpp)
 
 add_library(system76_power_kde_plugin SHARED ${PLUGIN_SRCS})

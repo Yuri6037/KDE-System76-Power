@@ -9,6 +9,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
 include(KDEInstallDirs)
+include(KDECMakeSettings)
 
 find_package(Qt5
              CONFIG REQUIRED

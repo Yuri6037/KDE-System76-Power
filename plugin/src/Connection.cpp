@@ -59,10 +59,6 @@ Connection::PowerProfile Connection::getProfile()
     return _curProfile;
 }
 
-void Connection::powerProfileChanged() const
-{
-}
-
 void Connection::onProfileChanged(const QString &name)
 {
     if (name == "Performance") {
